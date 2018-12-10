@@ -15,23 +15,27 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         final String key = "74dea97d3e6df9461980789902998e79";
-        final String accessParameter = "key=" + key;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
+        FragmentPagerAdapter fpAdapter = null;//getSupportFragmentManager();
+        viewPager.setAdapter(fpAdapter);
         RecipeApiService service = RecipeApiService.retrofit.create(RecipeApiService.class);
-        Call<Iterable<Recipe>> call = service.popularRecipes(accessParameter);
-        call.enqueue(new Callback<Iterable<Recipe>>() {
+        Call<SearchResponse> call = service.popularRecipes(key);
+        call.enqueue(new Callback<SearchResponse>() {
 
             @Override
-            public void onResponse(Call<Iterable<Recipe>> call, Response<Iterable<Recipe>> response)
+            public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response)
             {
-                Iterable<Recipe> topRecipes = response.body();
+                SearchResponse topRecipes = response.body();
+                Log.d("none", topRecipes.recipes().iterator().next().title());
+                //extract 3 recipes and apply them to the pages
             }
 
             @Override
-            public void onFailure(Call<Iterable<Recipe>> call, Throwable t)
+            public void onFailure(Call<SearchResponse> call, Throwable t)
             {
-                Log.d("error",t.toString());
+                Log.d("none",t.toString());
             }
 
         });
