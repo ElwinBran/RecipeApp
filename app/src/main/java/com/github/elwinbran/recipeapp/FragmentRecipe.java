@@ -2,6 +2,7 @@ package com.github.elwinbran.recipeapp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -42,7 +43,8 @@ public class FragmentRecipe extends Fragment
         Recipe model = (Recipe) data.getSerializable(MODEL_KEY);
         title.setText(model.title());
         Glide.with(this).load(model.imageUrl()).into(recipePreview);
-        //ingredientList.
+        ingredientList.setLayoutManager(new LinearLayoutManager(
+                this.getContext(), LinearLayoutManager.VERTICAL, false));
     }
 
 }
