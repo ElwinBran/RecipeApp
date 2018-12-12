@@ -67,7 +67,7 @@ public class Recipe implements Serializable
      */
     @SerializedName("ingredients")
     @Expose
-    private Iterable<String> ingredients;
+    private String ingredients;
 
     public Recipe(){}
 
@@ -81,8 +81,8 @@ public class Recipe implements Serializable
         return this.title;
     }
 
-    public Iterable<String> ingredients()
+    public String ingredients()
     {
-        return this.ingredients;
+        return (this.ingredients == null)? "" :this.ingredients;
     }
 }
