@@ -1,5 +1,6 @@
 package com.github.elwinbran.recipeapp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,6 +10,8 @@ import java.util.List;
  */
 public class IngredientSplitter
 {
+    private static final Character SPLIT_CHAR = '-';
+
     private static final IngredientSplitter ourInstance = new IngredientSplitter();
 
     public static IngredientSplitter getInstance()
@@ -22,6 +25,22 @@ public class IngredientSplitter
 
     public List<String> split(String ingredientList)
     {
-        return Arrays.asList("bub", "2 x bub");
+        ArrayList<String> ingredients = new ArrayList<>();
+        while(!ingredientList.isEmpty())
+        {
+            int index = ingredientList.indexOf(SPLIT_CHAR, 1);
+            if (index == -1)
+            {
+                ingredients.add(ingredientList);
+                ingredientList = "";
+            }
+            else
+            {
+                String ingredient = ingredientList.substring(0, index);
+                ingredients.add(ingredient);
+                ingredientList = ingredientList.substring(index + 1, ingredientList.length() - 1);
+            }
+        }
+        return ingredients;
     }
 }
