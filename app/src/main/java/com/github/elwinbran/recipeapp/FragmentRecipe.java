@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.List;
+
 public class FragmentRecipe extends Fragment
 {
     final static String MODEL_KEY = "recipe";
@@ -43,8 +45,12 @@ public class FragmentRecipe extends Fragment
         Recipe model = (Recipe) data.getSerializable(MODEL_KEY);
         title.setText(model.title());
         Glide.with(this).load(model.imageUrl()).into(recipePreview);
+
         ingredientList.setLayoutManager(new LinearLayoutManager(
                 this.getContext(), LinearLayoutManager.VERTICAL, false));
+        List<String> ingredients = IngredientSplitter.getInstance().split(model.ingredients());
+        RecyclerView.Adapter<IngredientViewHolder> adapter = new IngredientsViewAdapter(ingredients);
+        ingredientList.setAdapter(adapter);
     }
 
 }
