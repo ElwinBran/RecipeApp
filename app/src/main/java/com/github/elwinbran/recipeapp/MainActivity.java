@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity
             public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response)
             {
                 SearchResponse topRecipes = response.body();
-                Log.d("none", topRecipes.recipes().iterator().next().title());
-                Log.d("none", topRecipes.recipes().iterator().next().imageUrl());
                 List<Recipe> topRecipeList = topRecipes.recipes();
                 int maxRecipeRequirement;
                 if(topRecipeList.size() < recipeCount)

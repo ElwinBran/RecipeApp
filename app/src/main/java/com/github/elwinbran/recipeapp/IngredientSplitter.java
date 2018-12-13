@@ -1,5 +1,7 @@
 package com.github.elwinbran.recipeapp;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,6 +43,7 @@ public class IngredientSplitter
                 ingredientList = ingredientList.substring(index + 1, ingredientList.length() - 1);
             }
         }
+        Log.d("none", "split: " + ingredientList);
         return ingredients;
     }
 }
